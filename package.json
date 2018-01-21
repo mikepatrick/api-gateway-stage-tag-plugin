@@ -1,0 +1,13 @@
+{
+  "name": "api-gateway-stage-tag-plugin",
+  "version": "1.0.0",
+  "description": "Serverless plugin to tag API Gateway stages",
+  "main": "index.js",
+  "author": "mikepatrick",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikepatrick/api-gateway-stage-tag-plugin"
+  },
+  "devDependencies": {}
+}
