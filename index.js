@@ -12,9 +12,9 @@ class ServerlessPlugin {
   addTags() {
     const stackName = `${this.serverless.service.service}-${this.options.stage}`;
     const params = { StackName: stackName };
-
     const awsService = this.serverless.getProvider('aws');
-    const cloudFormation = new awsService.sdk.CloudFormation({region: this.options.region});
+    const credentials = awsService.getCredentials()
+    const cloudFormation = new awsService.sdk.CloudFormation(credentials);
 
     cloudFormation.describeStackResources(params, (err, data) => {
       if (err) {
@@ -27,7 +27,7 @@ class ServerlessPlugin {
 
         const restApiId = apiObj.PhysicalResourceId;
 
-        const apigateway = new awsService.sdk.APIGateway({region: this.options.region});
+        const apigateway = new awsService.sdk.APIGateway(credentials);
 
         const apiParams = {
           resourceArn: `arn:aws:apigateway:${this.options.region}::/restapis/${restApiId}/stages/${this.options.stage}`,
