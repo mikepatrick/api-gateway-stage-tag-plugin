@@ -10,6 +10,9 @@
     "url": "https://github.com/mikepatrick/api-gateway-stage-tag-plugin"
   },
   "devDependencies": {},
+  "peerDependencies": {
+    "aws-sdk-js": "^2.172.0"
+  },
   "keywords": [
     "serverless",
     "api gateway",
