@@ -28,19 +28,23 @@ class ServerlessPlugin {
         } else {
           const restApiId = apiObj.PhysicalResourceId;
 
-          const apiParams = {
-            resourceArn: `arn:aws:apigateway:${this.options.region}::/restapis/${restApiId}/stages/${this.options.stage}`,
-            tags: this.serverless.service.custom.apiStageTags
-          };
+          if (this.serverless.service.custom && this.serverless.service.custom.apiStageTags) { 
+            const apiParams = {
+              resourceArn: `arn:aws:apigateway:${this.options.region}::/restapis/${restApiId}/stages/${this.options.stage}`,
+              tags: this.serverless.service.custom.apiStageTags
+            };
 
-          this.apigwService.tagResource(apiParams, (apiErr, apiData) => {
-            if (apiErr) {
-              this.serverless.cli.log('[ERROR]: Could not tag API Gateway resource');
-              this.serverless.cli.log(apiErr, apiErr.stack);
-            } else {
-              this.serverless.cli.log(`Tagged API gateway stage ${restApiId}/${this.options.stage}`);
-            }
-          });
+            this.apigwService.tagResource(apiParams, (apiErr, apiData) => {
+              if (apiErr) {
+                this.serverless.cli.log('[ERROR]: Could not tag API Gateway resource');
+                this.serverless.cli.log(apiErr, apiErr.stack);
+              } else {
+                this.serverless.cli.log(`Tagged API gateway stage ${restApiId}/${this.options.stage}`);
+              }
+            });
+          } else {
+            this.serverless.cli.log('[WARNING]: No apiStageTags found to apply.');
+          }
         }
       }
     });
@@ -50,8 +54,6 @@ class ServerlessPlugin {
     const awsService = this.serverless.getProvider('aws');
     const stackName = awsService.naming.getStackName();
     const params = { StackName: stackName };
-
-    // const credentials = awsService.getCredentials();
 
     if (this.serverless.service.plugins.includes('serverless-plugin-split-stacks')) {
       this.cfnService.describeStackResources(params, (substackErr, substackData) => {
