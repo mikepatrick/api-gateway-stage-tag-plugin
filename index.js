@@ -47,10 +47,10 @@ class ServerlessPlugin {
   }
 
   addTags() {
-    const stackName = `${this.serverless.service.service}-${this.options.stage}`;
+    const awsService = this.serverless.getProvider('aws');
+    const stackName = awsService.naming.getStackName();
     const params = { StackName: stackName };
 
-    const awsService = this.serverless.getProvider('aws');
     // const credentials = awsService.getCredentials();
 
     if (this.serverless.service.plugins.includes('serverless-plugin-split-stacks')) {
