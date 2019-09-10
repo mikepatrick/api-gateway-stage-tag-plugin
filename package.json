@@ -11,7 +11,7 @@
   },
   "devDependencies": {},
   "peerDependencies": {
-    "aws-sdk-js": "^2.172.0"
+    "aws-sdk": "^2.172.0"
   },
   "keywords": [
     "serverless",
