@@ -55,7 +55,10 @@ class ServerlessPlugin {
     const stackName = awsService.naming.getStackName();
     const params = { StackName: stackName };
 
-    if (this.serverless.service.plugins.includes('serverless-plugin-split-stacks')) {
+    if (this.serverless.service.plugins.includes('serverless-plugin-split-stacks')
+        && this.serverless.service.custom.splitStacks
+        && this.serverless.service.custom.splitStacks.perType === true
+    ) {
       this.cfnService.describeStackResources(params, (substackErr, substackData) => {
         if (substackErr) {
           this.serverless.cli.log('[ERROR]: Could not describe stack resources.');
