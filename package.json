@@ -13,7 +13,8 @@
     "eslint": "^6.8.0"
   },
   "scripts": {
-    "lint": "node_modules/.bin/eslint index.js"
+    "lint": "node_modules/.bin/eslint index.js",
+    "clean": "rm -rf package && rm -f api-gateway-stage-tag-plugin*.tgz"
   },
   "peerDependencies": {
     "aws-sdk": "^2.172.0"
