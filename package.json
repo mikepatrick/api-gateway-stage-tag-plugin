@@ -12,6 +12,9 @@
   "devDependencies": {
     "eslint": "^6.8.0"
   },
+  "scripts": {
+    "lint": "node_modules/.bin/eslint index.js"
+  },
   "peerDependencies": {
     "aws-sdk": "^2.172.0"
   },
