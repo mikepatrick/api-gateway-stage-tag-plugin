@@ -34,6 +34,7 @@ class ServerlessPlugin {
               tags: this.serverless.service.custom.apiStageTags
             };
 
+            // eslint-disable-next-line no-unused-vars
             this.apigwService.tagResource(apiParams, (apiErr, apiData) => {
               if (apiErr) {
                 this.serverless.cli.log('[ERROR]: Could not tag API Gateway resource');
