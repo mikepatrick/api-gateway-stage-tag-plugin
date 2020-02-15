@@ -1,6 +1,6 @@
 {
   "name": "api-gateway-stage-tag-plugin",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Serverless plugin to tag API Gateway stages",
   "main": "index.js",
   "author": "mikepatrick",
