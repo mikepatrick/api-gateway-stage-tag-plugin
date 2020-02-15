@@ -69,7 +69,7 @@ class ServerlessPlugin {
         const apiParams = {
           StackName: apiStack.PhysicalResourceId.split('/')[1]
         };
-        this.tagResource(apiParams)
+        this.tagResource(apiParams);
       });
     } else {
       this.tagResource(params);
