@@ -6,8 +6,12 @@ class ServerlessPlugin {
     this.options = options;
 
     const awsService = this.serverless.getProvider('aws');
-    this.cfnService = new awsService.sdk.CloudFormation(awsService.getCredentials());
-    this.apigwService = new awsService.sdk.APIGateway(awsService.getCredentials());
+    
+    const credentials = awsService.getCredentials();
+    credentials.region = this.serverless.providers.aws.getRegion();
+    
+    this.cfnService = new awsService.sdk.CloudFormation(credentials);
+    this.apigwService = new awsService.sdk.APIGateway(credentials);
 
     this.hooks = {
       'after:deploy:deploy': this.addTags.bind(this),
